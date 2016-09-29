@@ -45,8 +45,10 @@ suggested applications in a variety of domains, both within and outside demograp
 Application domains include subfields of human demography focusing on particular transitions, stages of the life course, or special sub populations (prisoners, athletes, and professors), but also applications to non-human species, natural phenomena, and artificial objects.
 \end{abstract}
 
-\section*{Background}
+*This is a very green paper for us at this point, but we expect to have a full
+manuscript well before the final upload deadline.*
 
+\section*{Background}
 %Since change and process can only unfold in time, time is essential to all
 %scientific inquiry. That events and change can be placed on a timeline, whether
 % explicit chain reactions, a gradual unfolding of argumentation, a trajectory of growth or metabolism, or a population mean level
@@ -64,16 +66,19 @@ tesselates to form a plane, or characteristic diagram. These identities are the
 well-known APC identity, as well as the TPD, LCD, and TAL identities. A
 fuller description about how these identities and diagrams relate, as well as an
 example about how the time framework might guide scientific inquiry is given in
-\citet{rsv2015}. 
+\citet{rsv2015}. In this paper, we intend to provide a diverse set of potential
+uses of said time framework.
+
+
+\section{Applications}
 
 Although its original description was
 motivated by the study of health patterns over the human lifecourse, where
 complete human lifespans define the lifecourse boundary, this need not be the
-case.
-The only example of an application given thus far has dealt with late-life
-health patterns \citep{riffe2015ttd}, and in this example the entire human
-lifespan set the space boundary. While this usage case is useful as a heuristic,
-and for qualifying morbidity comparisons or guiding morbidity projections
+case. The only empirical application given thus far has dealt with late-life
+morbidity patterns \citep{riffe2015ttd}, and in this example the maximum human
+lifespan sets the space boundary. While
+this usage case is useful as a heuristic, and for qualifying morbidity comparisons or guiding morbidity projections
 \citep{vanRaalte2015HLE}, it is also clear that providing more
 examples of applications would help illustrate the transportability of the
 framework and help guide other researchers in exploring its uses. For this
@@ -88,8 +93,129 @@ not have the data or expertise to carry out rigorously ourselves. For others, we
 work up some exploratory results given novel perspectives on data already
 available. 
 
-The empirical example we provide in this short abstract is based on rich
-data produced about Major League baseball players in the United States
+Part of the motivation for hashing out such a range of suggested applications is
+the common observation that time-to-death and age-at-death are unknown for
+living persons. This invites the observer to question the
+usefulness of the framework. In the first instance, the framework proves its
+utility even under this limitation, as the late-life health patterns of the
+deceased are the best and closest reference for the living. In other contexts,
+adopting different time perspectives may reveal robust and meaningful features
+of a process that chronological age patterns or even Lexis-surfaces fail to
+reveal. Further, ``life lines'' in the population modeled need not cover the
+full duration of a human life, and therefore might not succumb to impatience.
+In an extreme, we posit novel patterns in the growth and reproduction of
+bacteria, the lives of which are very short, and fully observable. Patterns in
+such timescales may be reproduced at will in the laboratory, and if structured
+by time since birth and time until death (or between well-defined stages) may be
+treated as reference standards; as nuanced descriptions of the lifecourse of bacteria. Human gestation presents a duration window several orders of
+maginitude longer, and also conformable to the TAL diagram. For human pregnancy,
+time since conception or implanation, time until parturition, and duration
+of gestation complete the TAL identity. These rich time measures may be used to
+structure data describing the development in the fetus, placenta, or mother. If
+patterns are based on a large and representative sample, standards
+may be developed to provide a new perspective on prenatal demography.
+
+Examples that will be included as this paper progresses are included in
+outline format in what follows. These include novel time-perspectives on
+demographic topics including birth-spacing, in-utero development, health
+measures, migration, and labor force demography. Special population applications
+will include examples from baseball player careers, recidivism or prison
+populations, and professor populations. Applications in non-human demography
+will come from bacterial growth and reproduction trajectories and a yet-to-be
+chosen industrial item, such as automobiles.
+
+All examples to be provided here are decidedly visual in nature, and this only
+represents the first step in a complete analysis: that of pattern detection of
+phenomena. Suggested posterior analyses might include the development of
+synthetic indicators that better capture and are sensitive to patterns in data.
+
+\section{Human demography}
+The human lifecourse may be treated as a whole, or segmented into shorter
+durations with well-defined starting and ending points. 
+
+	\subsection{Reproduction}
+	
+		\subsubsection{Birth spacing}
+		\FloatBarrier
+		Table~\ref{tab:spacing} lists a selection of birth-spacing time measures that
+		may be used to structure data and thereby uncover presently hidden patterns.
+		The patterns that may be uncovered by structuring data in this way are not
+		births, per se, since birth events define the bounds of the time-space, but
+		rather other behaviors, or health measures that may vary within birth
+		intervals. This may include, e.g., miscarriages, or it could be a variable
+		seemingly beside the point, but whose patterns are nonetheless conditioned on
+		birth-spacing.
+		
+		\begin{table}[h!]
+		\caption{Some birth spacing time measures and corresponding time identities.}
+	    \label{tab:spacing}
+		\begin{tabular}{lc}
+		Time measures & Identity \\ \hline
+		Time since birth i, time until birth i+1, interval & TAL\\
+		Time since birth i, year of birth i, year & APC\\
+		Time until birth i+1, year, year of birth i+1 & TPD\\
+		birth interval, year of birth i, year of birth i+1 & LCD
+		\end{tabular}
+		\end{table}
+		
+		Note that Table~\ref{tab:spacing} does not include mothers' absolute age, but
+		it captures the interval period as a complete space. However, age at birth i
+		may be used to condition any of the aforementioned surfaces, for instance.
+		
+		\subsubsection{In-utero development}
+		
+		Many routine measurements are taken by gynecologists that may be used to
+		\textit{fill} the TAL plane defined by time since conception, time until
+		parturition, and duration of gestation. Surely, each of these measures is a reasonable and
+		complementary way of structuring the health and development of either fetus,
+		placenta, or mother (or particular organs). We intend to seek data as provided
+		by a common smart-phone app used by mothers in the prenatal period, in order
+		to mock up some prenatal TAL surfaces. Failing this, we will just diagram one
+		out and provide more specific suggestions. 
+		
+		Table~\ref{tab:prenat} provides a fuller set of potential identities that may
+		pertain to the prenatal period. Note the lack of maternal age.
+		We suggest that this and other ``anchoring'' time variables may be used to
+		condition surfaces in small multiples.
+		
+		\begin{table}[h!]
+		\caption{Prenatal time measures, and corresponding time identities.}
+	    \label{tab:prenat}
+		\begin{tabular}{lc}
+		Time measures & Identity \\ \hline
+		Time since conc/impl, time until parturition, total gestation & TAL\\
+		Time since conc/impl, calendar time, time of conc/impl & APC\\
+		Time until parturition, calendar time, time of parturition & TPD\\
+		total gestation, time of conc/impl, time of parturition & LCD
+		\end{tabular}
+		\end{table}
+		
+		
+	\subsection{Health}
+		
+		Health measures may be modeled using prevalence or incidence-based models. At
+		this time we have measures of prevalence by birth cohort, time-until-death and
+		chronological age, as estimated from the U.S. \citet{HRS}
+		
+		time-to-death patterns of prevalence mechanically be produced by
+		chronological-age-patterned incidence rates. Specifically, if a sucession of
+		health states triggered by a single chronological-age-patterned onset itself
+		implies increasing probabilities of death, this may produce a time-to-death
+		pattern of prevalence. Whether to model using prevalence or incidence, is
+		however a tradeoff of convenience.
+
+	
+\section{}
+	
+	\subsection{Labor force demography}
+	Time measures
+	\subsection{Special subpopulations}
+		\subsubsection{Professors}
+		\subsubsection{Prisoners (or recidivism)}
+		Data downloaded \citep{LSVCB}
+		\subsubsection{Athletes}
+		The empirical sports example we will provide in the full manuscript is based
+		on rich data produced about Major League baseball players in the United States
 \citep{Lahman}, which is structured in such as way as to easily conform with the
 demographic time framework. Specifically, this database provides not only birth
 and death (where applicable) dates of major league players, but also season
@@ -98,67 +224,13 @@ pitching statistics as a function of time since debuting and time until retiring
 from professional play, thereby implying the third time dimension of career
 length. This particular setup is an event-history translation of the TAL
 diagram.
-
-Further examples that will be included as this paper progresses are included in
-outline format in what follows. These include novel time-perspectives on
-demographic topics including birth-spacing, in-utero development, health
-measures, migration, and labor force demography. Special population applications
-will include examples from baseball player careers, recidivism or prison
-populations, and professor populations. Applications in non-human demography
-will come from bacterial growth and reproduction trajectories, 
-
-All examples given here are decidedly visual in nature, and this only
-represents the first step in a complete analysis: that of pattern detection for
-phenomena.
-
-At this point 
-
-\section{Applications}
-
-\section{Human demography}
-	\subsection{Reproduction}
-		\subsubsection{Birth spacing}
-		Time since birth i, time until birth i+1, interval (TAL)
-		Time since birth i, year of birth i, year (APC)
-		Time until birth i+1, year, year of birth i+1 (TPD)
-		interval, year of birth i, year of birth i+1 (LCD)
-		
-		Note that this does not include age, but it captures the interval period as a
-		complete space.
-		\subsubsection{In-utero development}
-		time since conception, time until parturition, and duration of gestation
-		together combine into a TAL identity that also lends itself to exploration of
-		patterns of fetal development, placenta development, and maternal health.
-	\subsection{Health}
-		\subsubsection{Prevalence-based measures}
-		HRS study
-		\subsubsection{Incidence-based measures}
-		time-to-death patterns of prevalence mechanically be produced by
-		chronological-age-patterned incidence rates. Specifically, if a sucession of
-		health states triggered by a single chronological-age-patterned onset itself
-		implies increasing probabilities of death, this may produce a time-to-death
-		pattern of prevalence. Whether to model using prevalence or incidence, is
-		however a tradeoff of convenience.
-	\subsection{Migration}
-	\subsection{Labor force demography}
-	Time measures
-	\subsection{Special subpopulations}
-		\subsubsection{Professors}
-		\subsubsection{Prisoners}
-		Data downloaded \citep{LSVCB}
-		\subsubsection{Athletes}
-		Here sumo or footballers, will see. Email sent to sumodb maintainer Sept 27,
-		2016.
 \section{Non-human demography}	
 	\subsection{Bacterial growth}
-	\subsection{Natural phenomena}
-	\subsection{Manmade objects}
+	\subsection{Industrial item (tbd)}
 	
 \section{Discussion}
-
 Probably worth talking about statistical inference here.
 
-\section{Conclusions}
 
 
 \singlespacing
