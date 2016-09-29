@@ -10,12 +10,12 @@
 \usepackage{setspace}
 \usepackage{booktabs}
 \usepackage{chngpage}
-\usepackage{natbib}
+\usepackage[style=authoryear-comp]{natbib}
 \bibpunct{(}{)}{,}{a}{}{;} 
 \usepackage{url}
 \usepackage{nth}
 \usepackage{authblk}
-
+\DeclareRobustCommand{\VAN}[3]{#2} 
 % end preamble
 %-------------------------------------------
 
@@ -23,9 +23,12 @@
 
 \title{Domains of application for the demographic time framework}
 
-\author[1]{Tim Riffe\thanks{riffe@demogr.mpg.de}}
+\author[1]{Tim Riffe\thanks{riffe@demogr.mpg.de\\ ~~~~(author order tbd)}}
+\author[2,3]{Jonas Sch{\"o}ley}
+\author[2,3]{Francisco Villavicencio}
 \affil[1]{Max Planck Institute for Demographic Research}
-
+\affil[2]{University of Southern Denmark}
+\affil[3]{Max-Planck Odense Center on the Biodemography of Aging}
 
 %\author{[Authors]}
 
@@ -34,13 +37,12 @@
 
 \begin{abstract}
 The demographic time framework defines the time-space for birth-death processes
-that produce overlapping lifecourses. Although its original description was
-motivated by the study of health patterns over the human lifecourse, where complete human lifespans define the space boundary, this need not be the case.
-In fact, the framework is generally applicable to any domain where
-population-level variation occurs over time and within ``life''. Since the
+that produce overlapping lifecourses. The framework is generally applicable to
+any domain where population-level variation occurs over time and within ``life''. Since the
 framework is an abstraction, both intuitively coherent, but not
 necessarily obvious to translate into applications, we here offer a potluck of
 suggested applications in a variety of domains, both within and outside demography.
+Application domains include subfields of human demography focusing on particular transitions, stages of the life course, or special sub populations (prisoners, athletes, and professors), but also applications to non-human species, natural phenomena, and artificial objects.
 \end{abstract}
 
 \section*{Background}
@@ -53,11 +55,63 @@ suggested applications in a variety of domains, both within and outside demograp
 %In many applications of human demography, time-to-event is inferred rather than
 %measured directly
 
-A singular relationship unites six differemt measures of demographic time,
-chronological age (A), period (P), birth cohort (C), thanatological age (T), death cohort (D), and
-lifespan (L). Together, these time measures define a time-space in three
-dimensions. Further, there are four triad-identities within this set of six, and
-each of these tesselates to form a plane, or characteristic diagram.
+A singular relationship unites six distinct measures of demographic time:
+chronological age (A), period (P), birth cohort (C), thanatological age (T,
+also known as time-to-death), death cohort (D), and lifespan (L). Together,
+these time measures define a time-space in three dimensions. The set of six
+time measures also contains four three-member identities, each of which
+tesselates to form a plane, or characteristic diagram. These identities are the
+well-known APC identity, as well as the TPD, LCD, and TAL identities. A
+fuller description about how these identities and diagrams relate, as well as an
+example about how the time framework might guide scientific inquiry is given in
+\citet{rsv2015}. 
+
+Although its original description was
+motivated by the study of health patterns over the human lifecourse, where
+complete human lifespans define the lifecourse boundary, this need not be the
+case.
+The only example of an application given thus far has dealt with late-life
+health patterns \citep{riffe2015ttd}, and in this example the entire human
+lifespan set the space boundary. While this usage case is useful as a heuristic,
+and for qualifying morbidity comparisons or guiding morbidity projections
+\citep{vanRaalte2015HLE}, it is also clear that providing more
+examples of applications would help illustrate the transportability of the
+framework and help guide other researchers in exploring its uses. For this
+reason, we here aim to provide as diverse-as-possible set of applications in
+different domains of inquiry. The domains that we aim to cover range from
+standard human demography, medical research, special sub-populations defined by
+variable points of entry and exit, biology, the so-called hard sciences, and
+engineering. With such a wide variety of application domains, this treatment
+will be neccesarily brief with respect to each, in most cases consisting in
+sketches of potential analyses that we think would be feasible, but that we do
+not have the data or expertise to carry out rigorously ourselves. For others, we
+work up some exploratory results given novel perspectives on data already
+available. 
+
+The empirical example we provide in this short abstract is based on rich
+data produced about Major League baseball players in the United States
+\citep{Lahman}, which is structured in such as way as to easily conform with the
+demographic time framework. Specifically, this database provides not only birth
+and death (where applicable) dates of major league players, but also season
+statistics. For the exploratory analysis begin, we specifically look at
+pitching statistics as a function of time since debuting and time until retiring
+from professional play, thereby implying the third time dimension of career
+length. This particular setup is an event-history translation of the TAL
+diagram.
+
+Further examples that will be included as this paper progresses are included in
+outline format in what follows. These include novel time-perspectives on
+demographic topics including birth-spacing, in-utero development, health
+measures, migration, and labor force demography. Special population applications
+will include examples from baseball player careers, recidivism or prison
+populations, and professor populations. Applications in non-human demography
+will come from bacterial growth and reproduction trajectories, 
+
+All examples given here are decidedly visual in nature, and this only
+represents the first step in a complete analysis: that of pattern detection for
+phenomena.
+
+At this point 
 
 \section{Applications}
 
@@ -87,16 +141,16 @@ each of these tesselates to form a plane, or characteristic diagram.
 		however a tradeoff of convenience.
 	\subsection{Migration}
 	\subsection{Labor force demography}
+	Time measures
 	\subsection{Special subpopulations}
 		\subsubsection{Professors}
 		\subsubsection{Prisoners}
-		Data downloaded
+		Data downloaded \citep{LSVCB}
 		\subsubsection{Athletes}
 		Here sumo or footballers, will see. Email sent to sumodb maintainer Sept 27,
 		2016.
 \section{Non-human demography}	
-	\subsection{Flora}
-	\subsection{Fauna}
+	\subsection{Bacterial growth}
 	\subsection{Natural phenomena}
 	\subsection{Manmade objects}
 	
@@ -105,12 +159,6 @@ each of these tesselates to form a plane, or characteristic diagram.
 Probably worth talking about statistical inference here.
 
 \section{Conclusions}
-
-
-
-
-
-\cite{*}
 
 
 \singlespacing
