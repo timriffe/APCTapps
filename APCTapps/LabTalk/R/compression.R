@@ -106,7 +106,14 @@ api <- function(L){
 	distances <- (col(L) - .5) / grid.res
 	mean(L * distances, na.rm = TRUE)
 }
-
+sqapi <- function(L){
+	Nyears    <- ncol(L) / nrow(L)
+	n         <- ncol(L)
+	grid.res  <- nrow(L)
+	L[L == 0] <- NA
+	distances <- (col(L) - .5) / grid.res
+	mean(L * sqrt(distances), na.rm = TRUE)
+}
 
 
 pi <- piexp2(10, 10, .6, .27)
@@ -175,13 +182,20 @@ plot.L(L3, col = c("black","white"), axes = FALSE)
 L4 <- L * 0
 L4[1, ] <- TRUE
 
-epi(L0);epi(Lfries);epi(L1);epi(L2);epi(L3);epi(L4)
-medL(L0);medL(Lfries);medL(L1);medL(L2);medL(L3);medL(L4)
-cpi(L0);cpi(Lfries);cpi(L1);cpi(L2);cpi(L3);cpi(L4)
-vpi(L0);vpi(Lfries);vpi(L1);vpi(L2);vpi(L3);vpi(L4)
-sdpi(L0);sdpi(Lfries);sdpi(L1);sdpi(L2);sdpi(L3);sdpi(L4)
-api(L0);api(Lfries);api(L1);api(L2);api(L3);api(L4)
 
+L5 <- L0 * 0
+L5[,1] <- TRUE
+
+epi(L0);epi(L1);epi(Lfries);epi(L2);epi(L3);epi(L4);epi(L5)
+medL(L0);medL(L1);medL(Lfries);medL(L2);medL(L3);medL(L4);medL(L5)
+cpi(L0);cpi(L1);cpi(Lfries);cpi(L2);cpi(L3);cpi(L4);cpi(L5)
+vpi(L0);vpi(L1);vpi(Lfries);vpi(L2);vpi(L3);vpi(L4);vpi(L5)
+sdpi(L0);sdpi(L1);sdpi(Lfries);sdpi(L2);sdpi(L3);sdpi(L4);sdpi(L5)
+api(L0);api(L1);api(Lfries);api(L2);api(L3);api(L4);api(L5)
+sqapi(L0);sqapi(L1);sqapi(Lfries);sqapi(L2);sqapi(L3);sqapi(L4);sqapi(L5)
+
+
+# -----------------
 pdf("Figures/CompareTTD.pdf",width=6,height=6)
 xat <- 1:(ncol(L) / grid.res)
 plot(NULL, type = "n", xlim = c(0,max(xat)), ylim = c(0,8.5), 
@@ -195,6 +209,10 @@ plot.L(L4, col = c("black","white"), add=TRUE, yshift=0)
 text(0:10,0,0:10,pos=1,xpd=TRUE)
 text(0,0:1,0:1,pos=2,xpd=TRUE)
 dev.off()
+# -----------------
+
+plot.L(Lfries, col = c("black","white"))
+
 #
 #time <- c(19.09, 19.55, 17.89, 17.73, 25.15, 27.27, 25.24, 21.05, 21.65, 20.92, 22.61, 15.71, 22.04, 22.60, 24.25)
 #hist(time)
