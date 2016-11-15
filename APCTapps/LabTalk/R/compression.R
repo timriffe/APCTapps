@@ -20,7 +20,7 @@ pi2L <- function(pi, grid.res = 10){
 }
 
 # show L, stacked box grid.
-plot.L <- function(L, add = FALSE, col = c("black","white"), border = "white", bg = gray(.9), ...){
+plot.L <- function(L, add = FALSE, col = c("black","white"), border = "white", bg = gray(.9), xshift=0,yshift=0,...){
 	grid.res <- nrow(L)
 	x   <- (col(L) - 1) / grid.res
 	y   <- (row(L) - 1) / grid.res
@@ -30,9 +30,12 @@ plot.L <- function(L, add = FALSE, col = c("black","white"), border = "white", b
 		plot(NULL, type = "n", xlim = c(0,max(xat)), ylim = c(0,1), 
 				xaxs = "i", yaxs = "i",ylab = "pi",xlab = "TTD", asp = 1, ...)
 	}
-	rect(0,0,max(xat),1,col=bg,border = NA)
-	rect(x,y,x+1/grid.res,y+1/grid.res,col=ifelse(L,col[1],NA),border=ifelse(L,col[2],NA))
-	segments(xat,0,xat,1,col = col[2])
+	rect(0+xshift,0+yshift,max(xat)+xshift,1+yshift,col=bg,border = NA)
+	rect(x+xshift,y+yshift,x+1/grid.res+xshift,y+1/grid.res+yshift,
+			col=ifelse(L,col[1],NA),
+			border=ifelse(L,col[2],NA),
+			lwd=.5)
+	segments(xat+xshift,0+yshift,xat+xshift,1+yshift,col = col[2])
 }
 
 # this is unhealthy life expectancy
@@ -76,14 +79,17 @@ vpi <- function(L){
 	n         <- ncol(L)
 	grid.res  <- nrow(L)
 	L[L == 0] <- NA
-	distances <- (col(L) - .5) / Nyears
+	distances <- (col(L) - .5) / grid.res
 	mean(L * distances ^ 2, na.rm = TRUE)
 }
 sdpi <- function(L){
 	sqrt(vpi(L))
 }
 medL <- function(L){
-	n         <- ncol(L)
+	dims <- dim(L)
+	L <- as.logical(L)
+	dim(L) <- dims
+	n         <- dims[2]
 	grid.res  <- nrow(L)
 	Nyears    <- n / grid.res
 	medi      <- round(sum(L) / 2)
@@ -91,6 +97,17 @@ medL <- function(L){
 	coli      <- col(L)[which(L)[medi]]
 	(coli + .5) / grid.res
 }
+
+api <- function(L){
+	Nyears    <- ncol(L) / nrow(L)
+	n         <- ncol(L)
+	grid.res  <- nrow(L)
+	L[L == 0] <- NA
+	distances <- (col(L) - .5) / grid.res
+	mean(L * distances, na.rm = TRUE)
+}
+
+
 
 pi <- piexp2(10, 10, .6, .27)
 L <- pi2L(pi,10)
@@ -158,6 +175,26 @@ plot.L(L3, col = c("black","white"), axes = FALSE)
 L4 <- L * 0
 L4[1, ] <- TRUE
 
+epi(L0);epi(Lfries);epi(L1);epi(L2);epi(L3);epi(L4)
+medL(L0);medL(Lfries);medL(L1);medL(L2);medL(L3);medL(L4)
+cpi(L0);cpi(Lfries);cpi(L1);cpi(L2);cpi(L3);cpi(L4)
+vpi(L0);vpi(Lfries);vpi(L1);vpi(L2);vpi(L3);vpi(L4)
+sdpi(L0);sdpi(Lfries);sdpi(L1);sdpi(L2);sdpi(L3);sdpi(L4)
+api(L0);api(Lfries);api(L1);api(L2);api(L3);api(L4)
+
+pdf("Figures/CompareTTD.pdf",width=6,height=6)
+xat <- 1:(ncol(L) / grid.res)
+plot(NULL, type = "n", xlim = c(0,max(xat)), ylim = c(0,8.5), 
+	xaxs = "i", yaxs = "i",ylab = "prevalence",xlab = "time-to-death", asp = 1, axes=FALSE)
+plot.L(L0, col = c("black","white"), add=TRUE, yshift=7.5)
+plot.L(Lfries, col = c("black","white"), add=TRUE, yshift=6)
+plot.L(L1, col = c("black","white"), add=TRUE, yshift=4.5)
+plot.L(L2, col = c("black","white"), add=TRUE, yshift=3)
+plot.L(L3, col = c("black","white"), add=TRUE, yshift=1.5)
+plot.L(L4, col = c("black","white"), add=TRUE, yshift=0)
+text(0:10,0,0:10,pos=1,xpd=TRUE)
+text(0,0:1,0:1,pos=2,xpd=TRUE)
+dev.off()
 #
 #time <- c(19.09, 19.55, 17.89, 17.73, 25.15, 27.27, 25.24, 21.05, 21.65, 20.92, 22.61, 15.71, 22.04, 22.60, 24.25)
 #hist(time)
