@@ -1,7 +1,7 @@
 #
 # Author: tim
 ###############################################################################
-
+setwd("/home/tim/git/APCTapps/APCTapps/LabTalk")
 grid.res <- 10
 Nyears   <- 10
 n        <- grid.res * Nyears
@@ -196,16 +196,77 @@ sqapi(L0);sqapi(L1);sqapi(Lfries);sqapi(L2);sqapi(L3);sqapi(L4);sqapi(L5)
 
 
 # -----------------
-pdf("Figures/CompareTTD.pdf",width=6,height=6)
+pdf("Figures/CompareTTD1.pdf",width=6,height=6)
+xat <- 1:(ncol(L) / grid.res)
+plot(NULL, type = "n", xlim = c(0,max(xat)), ylim = c(0,8.5), 
+		xaxs = "i", yaxs = "i",ylab = "prevalence",xlab = "time-to-death", asp = 1, axes=FALSE)
+plot.L(L0, col = c("black","white"), add=TRUE, yshift=7.5)
+plot.L(L1, col = c("black","white"), add=TRUE, yshift=4.5)
+plot.L(Lfries, col = c("black","white"), add=TRUE, yshift=6)
+plot.L(L2, col = c("black","white"), add=TRUE, yshift=3)
+plot.L(L3, col = c("black","white"), add=TRUE, yshift=1.5)
+plot.L(L4, col = c("black","white"), add=TRUE, yshift=0)
+text(0:10,0,0:10,pos=1,xpd=TRUE)
+text(0,0:1,0:1,pos=2,xpd=TRUE)
+dev.off()
+
+
+pdf("Figures/CompareTTD2.pdf",width=6,height=6)
 xat <- 1:(ncol(L) / grid.res)
 plot(NULL, type = "n", xlim = c(0,max(xat)), ylim = c(0,8.5), 
 	xaxs = "i", yaxs = "i",ylab = "prevalence",xlab = "time-to-death", asp = 1, axes=FALSE)
 plot.L(L0, col = c("black","white"), add=TRUE, yshift=7.5)
-plot.L(Lfries, col = c("black","white"), add=TRUE, yshift=6)
-plot.L(L1, col = c("black","white"), add=TRUE, yshift=4.5)
+segments(api(L0),7.4,api(L0),8.6,col = "red",lwd=4)
+plot.L(L1, col = c("black","white"), add=TRUE, yshift=6)
+segments(api(L1),5.9,api(L1),7.1,col = "red",lwd=4)
+plot.L(Lfries, col = c("black","white"), add=TRUE, yshift=4.5)
+segments(api(Lfries),4.4,api(Lfries),5.6,col = "red",lwd=4)
 plot.L(L2, col = c("black","white"), add=TRUE, yshift=3)
+segments(api(L2),2.9,api(L2),4.1,col = "red",lwd=4)
 plot.L(L3, col = c("black","white"), add=TRUE, yshift=1.5)
+segments(api(L3),1.4,api(L3),2.6,col = "red",lwd=4)
 plot.L(L4, col = c("black","white"), add=TRUE, yshift=0)
+segments(api(L4),-.1,api(L4),1.1,col = "red",lwd=4)
+text(0:10,0,0:10,pos=1,xpd=TRUE)
+text(0,0:1,0:1,pos=2,xpd=TRUE)
+dev.off()
+
+pdf("Figures/CompareTTD3.pdf",width=6,height=6)
+xat <- 1:(ncol(L) / grid.res)
+plot(NULL, type = "n", xlim = c(0,max(xat)), ylim = c(0,8.5), 
+		xaxs = "i", yaxs = "i",ylab = "prevalence",xlab = "time-to-death", asp = 1, axes=FALSE)
+plot.L(L0, col = c("black","white"), add=TRUE, yshift=7.5)
+segments(sdpi(L0),7.4,sdpi(L0),8.6,col = "red",lwd=4)
+plot.L(L1, col = c("black","white"), add=TRUE, yshift=6)
+segments(sdpi(L1),5.9,sdpi(L1),7.1,col = "red",lwd=4)
+plot.L(Lfries, col = c("black","white"), add=TRUE, yshift=4.5)
+segments(sdpi(Lfries),4.4,sdpi(Lfries),5.6,col = "red",lwd=4)
+plot.L(L2, col = c("black","white"), add=TRUE, yshift=3)
+segments(sdpi(L2),2.9,sdpi(L2),4.1,col = "red",lwd=4)
+plot.L(L3, col = c("black","white"), add=TRUE, yshift=1.5)
+segments(sdpi(L3),1.4,sdpi(L3),2.6,col = "red",lwd=4)
+plot.L(L4, col = c("black","white"), add=TRUE, yshift=0)
+segments(sdpi(L4),-.1,sdpi(L4),1.1,col = "red",lwd=4)
+text(0:10,0,0:10,pos=1,xpd=TRUE)
+text(0,0:1,0:1,pos=2,xpd=TRUE)
+dev.off()
+
+pdf("Figures/CompareTTD4.pdf",width=6,height=6)
+xat <- 1:(ncol(L) / grid.res)
+plot(NULL, type = "n", xlim = c(0,max(xat)), ylim = c(0,8.5), 
+		xaxs = "i", yaxs = "i",ylab = "prevalence",xlab = "time-to-death", asp = 1, axes=FALSE)
+plot.L(L0, col = c("black","white"), add=TRUE, yshift=7.5)
+segments(sqapi(L0),7.4,sqapi(L0),8.6,col = "red",lwd=4)
+plot.L(L1, col = c("black","white"), add=TRUE, yshift=6)
+segments(sqapi(L1),5.9,sqapi(L1),7.1,col = "red",lwd=4)
+plot.L(Lfries, col = c("black","white"), add=TRUE, yshift=4.5)
+segments(sqapi(Lfries),4.4,sqapi(Lfries),5.6,col = "red",lwd=4)
+plot.L(L2, col = c("black","white"), add=TRUE, yshift=3)
+segments(sqapi(L2),2.9,sqapi(L2),4.1,col = "red",lwd=4)
+plot.L(L3, col = c("black","white"), add=TRUE, yshift=1.5)
+segments(sqapi(L3),1.4,sqapi(L3),2.6,col = "red",lwd=4)
+plot.L(L4, col = c("black","white"), add=TRUE, yshift=0)
+segments(sqapi(L4),-.1,sqapi(L4),1.1,col = "red",lwd=4)
 text(0:10,0,0:10,pos=1,xpd=TRUE)
 text(0,0:1,0:1,pos=2,xpd=TRUE)
 dev.off()
