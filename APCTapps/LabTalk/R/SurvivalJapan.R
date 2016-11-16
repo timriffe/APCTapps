@@ -18,7 +18,7 @@ ccol  <- gray(.1) # "#1A1A1A" "#1A1A1A"
 drawRect <- function(y1,y2,L,ThanoStart = 5,ThanoMax = .8,ChronoStart = 45,ChronoOmega=110,ChronoMax = .8){
 	
 	# lifespan rect
-	rect(0,y2,L,y1,border="white",col=gray(.9))
+	rect(0,y2,L,y1,border="white",col=gray(.8))
 	
 	# chronological pattern:
 	if (ChronoStart < L){
@@ -210,7 +210,7 @@ text(-1, seq(0, 1, by = .2), seq(0, 1, by = .2),pos = 2, xpd = TRUE,col=fore2)
 text(55, -.1, "Age", xpd = TRUE, cex = 1.2)
 text(-13, .5, "l(x)", xpd = TRUE, cex = 1.2)
 # label triangles:
-segments(a[1]-1, mean(c(q[2], q[1:2])), a[1] + 15,q[1], col = gray(.5), lty = 3)
+segments(a[1]-1, mean(c(q[2], q[1:2])), a[1] + 15,q[1], col = gray(.1), lty = 1)
 text(a[1] + 15, q[1], "TTD process", pos = 4, cex = 1.2)
 #segments(82, .02, 90, .18, col = gray(.5), lty = 3)
 #text(90, .18, "Age process", pos = 4, cex = 1.2)
@@ -317,10 +317,10 @@ text(-1, seq(0, 1, by = .2), seq(0, 1, by = .2),pos = 2, xpd = TRUE,col=fore2)
 text(55, -.1, "Age", xpd = TRUE, cex = 1.2)
 text(-13, .5, "l(x)", xpd = TRUE, cex = 1.2)
 # label triangles:
-#segments(a[1]-1, mean(c(q[2], q[1:2])), a[1] + 15,q[1], col = gray(.5), lty = 3)
-#text(a[1] + 15, q[1], "TTD process", pos = 4, cex = 1.2)
-#segments(82, .02, 90, .18, col = gray(.5), lty = 3)
-#text(90, .18, "Age process", pos = 4, cex = 1.2)
+segments(a[1]-1, mean(c(q[2], q[1:2])), a[1] + 15,q[1], col = gray(.1), lty = 1)
+text(a[1] + 15, q[1], "TTD process", pos = 4, cex = 1.2)
+segments(82, .02, 90, .18, col = gray(.1), lty = 1)
+text(90, .18, "Age process", pos = 4, cex = 1.2)
 
 #segments(110,.05,110,.95,col=gray(.8))
 ## summary squares

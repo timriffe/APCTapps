@@ -201,8 +201,8 @@ xat <- 1:(ncol(L) / grid.res)
 plot(NULL, type = "n", xlim = c(0,max(xat)), ylim = c(0,8.5), 
 		xaxs = "i", yaxs = "i",ylab = "prevalence",xlab = "time-to-death", asp = 1, axes=FALSE)
 plot.L(L0, col = c("black","white"), add=TRUE, yshift=7.5)
-plot.L(L1, col = c("black","white"), add=TRUE, yshift=4.5)
-plot.L(Lfries, col = c("black","white"), add=TRUE, yshift=6)
+plot.L(L1, col = c("black","white"), add=TRUE, yshift=6)
+plot.L(Lfries, col = c("black","white"), add=TRUE, yshift=4.5)
 plot.L(L2, col = c("black","white"), add=TRUE, yshift=3)
 plot.L(L3, col = c("black","white"), add=TRUE, yshift=1.5)
 plot.L(L4, col = c("black","white"), add=TRUE, yshift=0)
@@ -214,7 +214,8 @@ dev.off()
 pdf("Figures/CompareTTD2.pdf",width=6,height=6)
 xat <- 1:(ncol(L) / grid.res)
 plot(NULL, type = "n", xlim = c(0,max(xat)), ylim = c(0,8.5), 
-	xaxs = "i", yaxs = "i",ylab = "prevalence",xlab = "time-to-death", asp = 1, axes=FALSE)
+	xaxs = "i", yaxs = "i",ylab = "prevalence",xlab = "time-to-death", asp = 1, axes=FALSE,
+	main = expression(bar(TTD)), cex.main=1.5,font=3)
 plot.L(L0, col = c("black","white"), add=TRUE, yshift=7.5)
 segments(api(L0),7.4,api(L0),8.6,col = "red",lwd=4)
 plot.L(L1, col = c("black","white"), add=TRUE, yshift=6)
@@ -234,7 +235,8 @@ dev.off()
 pdf("Figures/CompareTTD3.pdf",width=6,height=6)
 xat <- 1:(ncol(L) / grid.res)
 plot(NULL, type = "n", xlim = c(0,max(xat)), ylim = c(0,8.5), 
-		xaxs = "i", yaxs = "i",ylab = "prevalence",xlab = "time-to-death", asp = 1, axes=FALSE)
+		xaxs = "i", yaxs = "i",ylab = "prevalence",xlab = "time-to-death", asp = 1, axes=FALSE,
+		main = expression(bar(TTD^2)), cex.main=1.5,font=3)
 plot.L(L0, col = c("black","white"), add=TRUE, yshift=7.5)
 segments(sdpi(L0),7.4,sdpi(L0),8.6,col = "red",lwd=4)
 plot.L(L1, col = c("black","white"), add=TRUE, yshift=6)
@@ -254,7 +256,8 @@ dev.off()
 pdf("Figures/CompareTTD4.pdf",width=6,height=6)
 xat <- 1:(ncol(L) / grid.res)
 plot(NULL, type = "n", xlim = c(0,max(xat)), ylim = c(0,8.5), 
-		xaxs = "i", yaxs = "i",ylab = "prevalence",xlab = "time-to-death", asp = 1, axes=FALSE)
+		xaxs = "i", yaxs = "i",ylab = "prevalence",xlab = "time-to-death", asp = 1, axes=FALSE,
+		main = expression(bar(sqrt("TTD"))), cex.main=1.5,font=3)
 plot.L(L0, col = c("black","white"), add=TRUE, yshift=7.5)
 segments(sqapi(L0),7.4,sqapi(L0),8.6,col = "red",lwd=4)
 plot.L(L1, col = c("black","white"), add=TRUE, yshift=6)
@@ -271,9 +274,97 @@ text(0:10,0,0:10,pos=1,xpd=TRUE)
 text(0,0:1,0:1,pos=2,xpd=TRUE)
 dev.off()
 # -----------------
+# generate some empirical results
+nsResults    <- local(get(load("Data/nsResults.Rdata")))
+nsResults    <- do.call(rbind, nsResults)
+nsResults$la <- nsResults$ca + nsResults$ta
+head(nsResults)
+colnames(nsResults)
+unique(nsResults[,"var"])
+ps     <- nsResults[nsResults[,"var"] == "psych" & nsResults[,"Sex"] == "m", ]
+adl3   <- nsResults[nsResults[,"var"] == "adl3_" & nsResults[,"Sex"] == "m", ]
 
-plot.L(Lfries, col = c("black","white"))
+# lifespans between 80 and 90, ta 0-9
+ps     <- ps[ps[,"la"] >= 80 & ps[,"la"] < 90 & ps[,"ta"] < 10 & ps[,"b_yr"] <= 1925 & ps[,"b_yr"] >= 1915, ]
+adl3   <- adl3[adl3[,"la"] >= 80 & adl3[,"la"] < 90 & adl3[,"ta"] < 10 & adl3[,"b_yr"]<= 1925 & adl3[,"b_yr"] >= 1915, ]
+head(adl3)
+library(reshape2)
+psA  <- acast(ps, ta~la~b_yr, value.var="pi")
+adl3A <- acast(adl3, ta~la~b_yr, value.var="pi")
 
+
+imputeNAs <- function(Mat){
+	colReplace <- colSums(is.na(Mat)) == nrow(Mat)
+	imputation <- rowMeans(Mat, na.rm = TRUE)
+	Mat[,colReplace] <- imputation
+	# if there is still an NA triangle on the left:
+	if (any(is.na(Mat))){
+		Mat[is.na(Mat)] <- imputation[row(Mat)[is.na(Mat)]]
+	}
+	Mat
+}
+apiM <- function(Mat){
+	sum(rowSums(Mat) * (1:nrow(Mat)-.5)) / sum(Mat)
+}
+
+Ncoh <- dim(adl3A)[3]
+ad3level <- pslevel <-pstrend <- ad3trend <- rep(0, Ncoh)
+for (i in 1:Ncoh){
+	psA[,,i]  <- imputeNAs(psA[,,i])
+	adl3A[,,i] <- imputeNAs(adl3A[,,i])
+	ad3trend[i] <- apiM(adl3A[,,i])
+	pstrend[i]  <- apiM(psA[,,i])
+	ad3level[i] <- sum(adl3A[,,i])
+	pslevel[i] <- sum(psA[,,i])
+}
+
+
+
+cohs <- as.integer(dimnames(psA)[[3]])
+
+range(psA)
+range(adl3A)
+co   <- 1915
+for (co in cohs){
+	Mat <- psA[,,as.character(co)]
+	pdf(file.path("Figures",paste0("ps",co,".pdf")))
+	matplot(0:9,Mat, ylim = c(0,.2), type = 'l', lty =1, 
+			col = gray(seq(.7,.1,length=10)),lwd = seq(4,1,length=10),
+			ylab = "prevalence", xlab = "time-to-death", yaxs="i",main = co,
+			cex.main = 4, font.main = 2)
+	lines(0:9,rowMeans(Mat), col = "red", lwd = 3)
+	dev.off()
+	Mat <- adl3A[,,as.character(co)]
+	pdf(file.path("Figures",paste0("adl3",co,".pdf")))
+	matplot(0:9,Mat, ylim = c(0,.4), type = 'l', lty =1, 
+			col = gray(seq(.7,.1,length=10)),lwd = seq(4,1,length=10),
+			ylab = "prevalence", xlab = "time-to-death", yaxs="i",main = co,
+			cex.main = 4, font.main = 2)
+	lines(0:9,rowMeans(Mat), col = "red", lwd = 3)
+	dev.off()
+}
+
+
+
+
+pdf("Figures/TrendsMeanTTD.pdf")
+par(mai=c(1,1.2,.2,.2))
+plot(cohs,ad3trend, ylim = c(3,4.5), type = "l", lwd = 3, col = gray(.2),
+		ylab = expression(bar(TTD)), xlab = "Birth cohort", cex.lab = 2)
+text(cohs[5],ad3trend[5],"ADL3",pos=3,cex=2,font=2)
+lines(cohs,pstrend, lwd = 4, col = gray(.4))
+text(cohs[5],pstrend[5]*1.01,"psych problems",pos=3,cex=2,font=2)
+dev.off()
+
+
+plot(cohs,ad3level)
+plot(cohs,pslevel)
+
+
+
+library(HMDHFDplus)
+USAD <- readHMDweb("USA","Deaths_lexis", username = us, password = pw)
+dimnames()
 #
 #time <- c(19.09, 19.55, 17.89, 17.73, 25.15, 27.27, 25.24, 21.05, 21.65, 20.92, 22.61, 15.71, 22.04, 22.60, 24.25)
 #hist(time)
