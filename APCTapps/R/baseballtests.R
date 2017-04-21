@@ -18,8 +18,10 @@ Dat <- merge(Pitching, Master, by = c("playerID"))
 # T <- D - P
 # L <- D - C
 
-Dat$P     <- Dat$yearID
+head(Dat)
 
+
+Dat$P           <- Dat$yearID
 Dat$debut   	<- decimal_date(as.Date(Dat$debut))
 Dat$C     		<- floor(Dat$debut)
 Dat$finalGame 	<- decimal_date(as.Date(Dat$finalGame))
@@ -27,6 +29,10 @@ Dat$D     		<- floor(Dat$finalGame)
 Dat$A     		<- Dat$P - Dat$C
 Dat$T     		<- Dat$D - Dat$P
 Dat$L     		<- Dat$D - Dat$C
+
+
+
+# PCD, debut, retire. n = 5
 
 # now get demographic time measures set up (lwoercase)
 Dat$d 			<- decimal_date(as.Date(Dat$deathDate))
