@@ -25,7 +25,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="0.9579964"
      inkscape:cx="4189.5556"
-     inkscape:cy="3394.1513"
+     inkscape:cy="3519.4127"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -7767,11 +7767,11 @@
        xml:space="preserve"
        id="flowRoot6693"
        style="font-size:15px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Nimbus Roman No9 L;-inkscape-font-specification:Nimbus Roman No9 L"
-       transform="translate(10.438453,-3286.4392)"><flowRegion
+       transform="translate(-59.49918,-3213.37)"><flowRegion
          id="flowRegion6695"><rect
            id="rect6697"
-           width="483.30054"
-           height="62.630569"
+           width="534.44904"
+           height="149.26973"
            x="3603.3538"
            y="756.31226"
            style="font-size:15px" /></flowRegion><flowPara
@@ -7780,5 +7780,15 @@
          style="font-size:15px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Sans;-inkscape-font-specification:Sans"
          id="flowPara6703">R package version 5.0-0. </flowPara><flowPara
          style="font-size:15px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Sans;-inkscape-font-specification:Sans"
-         id="flowPara6701">https://CRAN.R-project.org/package=Lahman</flowPara></flowRoot>  </g>
+         id="flowPara6701">https://CRAN.R-project.org/package=Lahman</flowPara><flowPara
+         style="font-size:15px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Sans;-inkscape-font-specification:Sans"
+         id="flowPara6705" /><flowPara
+         style="font-size:15px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Sans;-inkscape-font-specification:Sans"
+         id="flowPara6707">based on: </flowPara><flowPara
+         style="font-size:15px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Sans;-inkscape-font-specification:Sans"
+         id="flowPara6709">Lahman, S. (2016) Lahman’s Baseball Database, 1871-2015, </flowPara><flowPara
+         style="font-size:15px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Sans;-inkscape-font-specification:Sans"
+         id="flowPara6715">2015 version. </flowPara><flowPara
+         style="font-size:15px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Sans;-inkscape-font-specification:Sans"
+         id="flowPara6717">http://www.seanlahman.com/baseball-archive/statistics/</flowPara></flowRoot>  </g>
 </svg>
