@@ -66,11 +66,10 @@ Dat 	 <- Dat[Dat$d4 > 15 | is.na(Dat$d4), ]
 Dat 	 <- Dat[Dat$d5 >= 0 | is.na(Dat$d5), ]
 Dat 	 <- Dat[Dat$d7 <= 101 | is.na(Dat$d7), ]
 
+ramp <- colorRampPalette(RColorBrewer::brewer.pal(9,"YlGn"),space="Lab")
 
-sum(is.na(Dat$H))
-head(Dat)
 #make function to take first 2 elements of each triad, plot BA average
-SurfGeneric <- function(Dat, x="d1",y="p1",stat = "BA", agg = mean,contour=FALSE,labels,...){
+SurfGeneric <- function(Dat, x="d1",y="p1",stat = "BA", agg = mean,contour=FALSE,labels,ramp,smoothit=TRUE,...){
 	Dati     <- Dat
 	
 	keep     <- !is.na(Dati[,x]) & !is.na(Dati[,y])
@@ -80,16 +79,23 @@ SurfGeneric <- function(Dat, x="d1",y="p1",stat = "BA", agg = mean,contour=FALSE
 	#any(is.na(Dati[,y]))
 	#denom   <- acast(Dat, as.formula(paste0(y,"~",x)),length,value.var="yearID",fill = NA_real_)
 	
-	
-	
-	Surf    <- acast(Dati, as.formula(paste0(y,"~",x)),agg,value.var=stat,fill=NA_real_,...)
+	Surf    <- acast(Dati, as.formula(paste0(y,"~",x)),agg,value.var=stat,fill=NA_real_,na.rm=TRUE)
 	xat     <- as.integer(colnames(Surf))
 	yat     <- as.integer(rownames(Surf))
+	if (smoothit){
+	Surfsm <- image.smooth(Surf)$z
+	Surfsm[is.na(Surf)] <- NA
+	Surf <- Surfsm
+    }
+	
 	Nplayers <- length(unique(Dati$playerID))
 	Nobs     <- nrow(Dati)
-	image(xat,yat,t(Surf),asp=1, xlab = labels[x], ylab = labels[y], main = paste0(Nobs, " observations of ", Nplayers, " players"))
+	image(xat,yat,t(Surf),asp=1, xlab = labels[x], ylab = labels[y], 
+			main = paste(as.character(substitute(agg)),stat,labels[y],"by",labels[x]),
+			sub = paste0(Nobs, " observations of ", Nplayers, " players"),col=ramp)
 	if(contour)	contour(xat,yat,t(Surf),add=TRUE)
 }
+
 # BA: battive avg
 # PA: plate appearances
 # TB: total bases
@@ -97,8 +103,7 @@ SurfGeneric <- function(Dat, x="d1",y="p1",stat = "BA", agg = mean,contour=FALSE
 # OBP: on base pct
 # OPS: on base pct + slugging
 # BABIP: batting avg on balls in play
-SurfGeneric(Dat, x="d3",y="d6",stat = "BABIP", agg = function(x,...){sd(x,...)/mean(x,...)},labels=labels,na.rm=TRUE)
-
+cv <- function(x,...){sd(x,...)/mean(x,...)}
 
 stats <- c("BA","PA","TB","SlugPct","OBP","OPS","BABIP")
 
@@ -107,10 +112,15 @@ lapply(stats, function(stat, Dat){
 			path <- paste0("/home/tim/git/APCTapps/APCTapps/Figures/triads",stat,"sd.pdf")
 			pdf(path)
 			for (i in 1:length(triads)){
-				SurfGeneric(Dat, 
+				SurfGeneric(Dat=Dat, 
 						x = triads[[i]][1], 
 						y = triads[[i]][2], 
-						stat = "BA", agg = sd, labels = labels)
+						stat = stat, 
+						agg = cv, 
+						labels = labels, 
+						na.rm=TRUE,
+						ramp=rev(ramp(20)),
+						contour=TRUE)
 			}
 			dev.off()
 		}, Dat=Dat)
@@ -119,10 +129,15 @@ lapply(stats, function(stat, Dat){
 			path <- paste0("/home/tim/git/APCTapps/APCTapps/Figures/triads",stat,"mean.pdf")
 			pdf(path)
 			for (i in 1:length(triads)){
-				SurfGeneric(Dat, 
+				SurfGeneric(Dat=Dat, 
 						x = triads[[i]][1], 
 						y = triads[[i]][2], 
-						stat = "BA", agg = mean, labels = labels)
+						stat = stat, 
+						agg = mean, 
+						labels = labels, 
+						na.rm=TRUE,
+						ramp=rev(ramp(20)),
+						contour=TRUE)
 			}
 			dev.off()
 		}, Dat=Dat)
@@ -131,10 +146,23 @@ lapply(stats, function(stat, Dat){
 			path <- paste0("/home/tim/git/APCTapps/APCTapps/Figures/triads",stat,"CV.pdf")
 			pdf(path)
 			for (i in 1:length(triads)){
-				SurfGeneric(Dat, 
+				SurfGeneric(Dat=Dat, 
 						x = triads[[i]][1], 
 						y = triads[[i]][2], 
-						stat = "BA", agg = function(x, ...){sd(x,...)/mean(x,...)}, labels = labels)
+						stat = stat, 
+						agg = cv, 
+						labels = labels, 
+						na.rm=TRUE,
+						ramp=rev(ramp(20)),
+						contour=TRUE)
 			}
 			dev.off()
 		}, Dat=Dat)
+
+# --------------------------------------------
+
+# Monday TODO:
+# make grid of surfaces, more artisanally
+
+
+
