@@ -54,7 +54,7 @@ DefaultDurationOrdering <- function(p){
 }
 
 
-draw.timeline <- function(p,ylim=c(-3,0),dcol,pcol,label=TRUE){
+draw.timeline <- function(p,ylim=c(-3,0),dcol,pcol,label=TRUE,...){
 	durs <- DefaultDurationOrdering(p)
 	if (missing(dcol)){
 		dcol <- rep("black",nrow(durs))

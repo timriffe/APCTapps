@@ -30,7 +30,7 @@ points(decide.verts(p=seq(0,5,length=6)), pch = 16, cex=3, col = c(opcol,opcol,p
 dev.off()
 
 timeline.graph(5,label=FALSE,dcol=col[6:15],pcol=col[1:5],lwd=5)
-draw.timeline(p=seq(0,5,length=5),ylim=c(-5,0),dcol=col[6:15],pcol=col[1:5],lwd=3)
+draw.timeline(p=seq(0,5,length=5),ylim=c(-5,0),dcol=col[6:15],pcol=col[1:5])
 
 # code used to generate baseball graph colors!
 # this still won't recreate them, because it took several dice rolls each...
