@@ -7,6 +7,7 @@ weeks   <- 0:45
 wk5     <- seq(0, 45, by = 5)
 
 pdf("Figures/PrenatalDiagram.pdf")
+#png("Figures/PrenatalDiagram.png")
 par(mai = c(1.5, .5, .5, .5), xpd = TRUE)
 plot(NULL, 
 		type = "n", 
